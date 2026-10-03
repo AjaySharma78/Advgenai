@@ -1,0 +1,177 @@
+/* ===========================================================
+   Advgenai site pages (home + week pages): the same hand-drawn
+   "sketch" look as the slide decks, in a normal scrolling page.
+   Paper by default. The ☾ button switches to the chalkboard.
+   =========================================================== */
+:root {
+  --ls: 0.03em;                    /* letter spacing: a little more than normal, so the handwriting fonts breathe */
+  --bg: #faf6ec;
+  --text: #1f1f1f;
+  --muted: #45413a;
+  --soft: #8a8170;
+  --dots: #d8cfbd;
+  --surface: #fffdf7;
+  --line: #1f1f1f;
+  --hl-yellow: #fff176;
+  --hl-yellow-soft: #fff8c4;
+  --hl-pink: #ffc1cc;
+  --hl-green: #c8f7c5;
+  --hl-blue: #cfe8ff;
+  --pen-red: #d93025;
+  --pen-blue: #1a56db;
+  --colab: #ffa94d;
+  --shadow: rgba(31, 31, 31, 0.14);
+  --wobble: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --wobble-s: 30px 8px 26px 9px / 9px 26px 8px 30px;
+  --font-display: "Kalam", "Comic Sans MS", cursive;
+  --font-body: "Patrick Hand", "Comic Sans MS", cursive;
+  --font-note: "Caveat", "Comic Sans MS", cursive;
+}
+:root[data-theme="dark"] {          /* chalkboard */
+  --bg: #26332d;
+  --text: #f4f1e8;
+  --muted: #d3dbd4;
+  --soft: #9fb0a4;
+  --dots: rgba(255, 255, 255, 0.07);
+  --surface: rgba(255, 255, 255, 0.05);
+  --line: #f4f1e8;
+  --hl-yellow: rgba(255, 241, 118, 0.38);
+  --hl-yellow-soft: rgba(255, 241, 118, 0.14);
+  --hl-pink: rgba(255, 145, 170, 0.4);
+  --hl-green: rgba(140, 240, 150, 0.3);
+  --hl-blue: rgba(120, 190, 255, 0.24);
+  --pen-red: #ff8a80;
+  --pen-blue: #82b1ff;
+  --colab: #e8913a;
+  --shadow: rgba(0, 0, 0, 0.3);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body); font-size: 22px; line-height: 1.5; letter-spacing: var(--ls); color: var(--text);
+  background: radial-gradient(circle, var(--dots) 1.6px, transparent 1.9px) 0 0 / 34px 34px, var(--bg);
+  min-height: 100vh;
+}
+/* the wavy red pen line along the bottom, like the slides */
+body::after {
+  content: ""; position: fixed; left: 0; right: 0; bottom: 0; height: 14px; pointer-events: none; z-index: 5;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='14'%3E%3Cpath d='M0 7 Q12 0 24 7 T48 7' fill='none' stroke='%23d93025' stroke-width='3'/%3E%3C/svg%3E") repeat-x;
+}
+.wrap { max-width: 1120px; margin: 0 auto; padding: 22px 24px 96px; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--pen-blue); outline-offset: 4px; }
+
+/* ---------- top bar ---------- */
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.brand {
+  display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text);
+  font: 700 25px var(--font-note); letter-spacing: var(--ls);
+  border: 2px solid var(--line); border-radius: var(--wobble-s); background: var(--surface); padding: 3px 18px 3px 14px;
+}
+.brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--pen-red); }
+.theme {
+  font: 700 23px var(--font-note); letter-spacing: var(--ls); cursor: pointer; color: var(--text);
+  border: 2px solid var(--line); border-radius: var(--wobble-s); background: var(--surface); padding: 3px 16px;
+}
+.theme:hover { background: var(--hl-yellow-soft); }
+
+/* ---------- type ---------- */
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: 0.02em; }
+mark {
+  background: var(--hl-yellow); color: inherit; padding: 0 0.14em; border-radius: 0.4em 0.2em 0.5em 0.25em;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.note { font: 700 32px var(--font-note); letter-spacing: var(--ls); color: var(--pen-red); }
+.lede { font-size: 26px; color: var(--muted); max-width: 640px; margin-top: 14px; }
+.section { font-size: 40px; margin: 38px 0 20px; line-height: 1.15; }
+.section span { text-decoration: underline wavy var(--pen-blue); text-decoration-thickness: 2px; text-underline-offset: 8px; }
+
+/* ---------- hero ---------- */
+.hero { display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; align-items: center; padding: 26px 0 4px; }
+.hero h1 { font-size: clamp(46px, 7.4vw, 96px); line-height: 1.08; margin-top: 4px; }
+.hero .doodle { width: min(100%, 360px); height: auto; justify-self: center; display: block; transform: rotate(2deg); }
+.hero.small { grid-template-columns: 1fr auto; }
+.hero.small h1 { font-size: clamp(40px, 6vw, 72px); }
+.hero.small .doodle { width: 190px; }
+.back { display: inline-block; margin: 6px 0 4px; font: 700 26px var(--font-note); letter-spacing: var(--ls); color: var(--pen-blue); text-decoration: none; }
+.back:hover { text-decoration: underline wavy; }
+
+/* ---------- cards ---------- */
+.grid { display: grid; gap: 34px 28px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); padding-top: 10px; }
+.days { grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); }
+.card {
+  position: relative; display: flex; flex-direction: column; gap: 10px; padding: 30px 30px 26px;
+  background: var(--surface); border: 3px solid var(--line); border-radius: var(--wobble);
+  color: var(--text); text-decoration: none; transition: transform 0.18s, box-shadow 0.18s;
+  box-shadow: 6px 6px 0 var(--shadow);
+}
+.grid > .card:nth-child(odd) { transform: rotate(-0.6deg); }
+.grid > .card:nth-child(even) { transform: rotate(0.5deg); }
+.card.ready { background: var(--hl-yellow-soft); }
+.card.ready::before {                       /* a strip of tape holding the card up */
+  content: ""; position: absolute; top: -15px; left: 50%; width: 92px; height: 28px; transform: translateX(-50%) rotate(-3deg);
+  background: var(--hl-pink); border: 1px solid rgba(0, 0, 0, 0.18); opacity: 0.9;
+}
+a.card.ready:hover, .card.ready:hover { transform: rotate(0deg) translateY(-5px); box-shadow: 9px 11px 0 var(--shadow); }
+.card .tag { font: 700 30px var(--font-note); letter-spacing: var(--ls); color: var(--pen-red); line-height: 1; }
+.card h3 { font-size: 36px; line-height: 1.15; }
+.card p { font-size: 22px; color: var(--muted); }
+.chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.chips li { border: 2px solid var(--line); border-radius: var(--wobble-s); background: var(--hl-green); padding: 0 12px; font-size: 19px; }
+.go { margin-top: auto; padding-top: 10px; font: 700 26px var(--font-display); letter-spacing: var(--ls); text-decoration: underline wavy var(--pen-blue); text-decoration-thickness: 2px; text-underline-offset: 7px; }
+
+/* locked: not clickable, dashed and faded, with a "coming soon" sticker */
+.card.locked { background: transparent; border-style: dashed; box-shadow: none; opacity: 0.74; cursor: not-allowed; }
+.soon {
+  position: absolute; top: -16px; right: 20px; transform: rotate(6deg); padding: 1px 16px;
+  font: 700 25px var(--font-note); letter-spacing: var(--ls); color: var(--text);
+  background: var(--hl-pink); border: 2px solid var(--line); border-radius: var(--wobble-s);
+}
+
+/* ---------- buttons ---------- */
+.actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 22px; text-decoration: none; color: var(--text);
+  font: 700 22px var(--font-display); letter-spacing: var(--ls); white-space: nowrap;
+  border: 3px solid var(--line); border-radius: var(--wobble-s); box-shadow: 3px 3px 0 var(--line);
+  transition: transform 0.14s, box-shadow 0.14s;
+}
+.btn.deck { background: var(--hl-yellow); }
+.btn.colab { background: var(--colab); }
+a.btn:hover { transform: translate(-2px, -2px) rotate(-1deg); box-shadow: 5px 5px 0 var(--line); }
+a.btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--line); }
+.btn.off { opacity: 0.5; border-style: dashed; box-shadow: none; background: transparent; cursor: not-allowed; user-select: none; }
+
+/* ---------- how-to box + footer ---------- */
+.howto {
+  margin-top: 46px; padding: 20px 28px; background: var(--hl-blue); border: 3px dashed var(--line); border-radius: var(--wobble);
+}
+.howto h3 { font-size: 30px; margin-bottom: 6px; }
+.howto ol { padding-left: 28px; font-size: 22px; }
+.howto li { margin: 4px 0; }
+code { font-family: Consolas, "Courier New", monospace; font-size: 0.85em; letter-spacing: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 0 6px; }
+.foot { margin-top: 40px; font: 700 24px var(--font-note); letter-spacing: var(--ls); color: var(--soft); }
+
+/* ---------- doodle (the robot) ---------- */
+.doodle { overflow: visible; }
+.doodle .ink { fill: none; stroke: var(--text); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.doodle .fill-y { fill: var(--hl-yellow); }
+.doodle .fill-b { fill: var(--hl-blue); }
+.doodle .fill-r { fill: var(--pen-red); }
+.doodle .dot { fill: var(--text); }
+.doodle text { font-family: var(--font-note); font-weight: 700; fill: var(--pen-red); letter-spacing: var(--ls); }
+
+/* ---------- phones ---------- */
+@media (max-width: 760px) {
+  body { font-size: 20px; }
+  .wrap { padding: 16px 16px 90px; }
+  .hero, .hero.small { grid-template-columns: 1fr; }
+  .hero .doodle { width: 220px; }
+  .hero.small .doodle { display: none; }
+  .days { grid-template-columns: 1fr; }
+  .card { padding: 26px 22px 22px; }
+  .card h3 { font-size: 32px; }
+  .btn { font-size: 20px; padding: 8px 18px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Advgenai · Advanced Agentic AI</title>
+<meta name="description" content="A hands-on course: build AI agents that use tools, keep state and work within limits.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>try{if(localStorage.getItem("deck-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+</head>
+<body>
+<!-- makes the robot's lines look hand-drawn -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="7" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</defs></svg>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="index.html"><span class="dot"></span>Advgenai</a>
+    <button class="theme" id="theme" type="button" aria-label="Switch between paper and chalkboard">☾ chalkboard</button>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="note">a hands-on course · 6 weeks · 4 days each</p>
+      <h1>Advanced <mark>Agentic AI</mark></h1>
+      <p class="lede">From building LLM apps to designing AI agents that use tools, keep state and work within limits. Learn it, watch it built, then build it yourself.</p>
+    </div>
+    <svg class="doodle" viewBox="0 0 420 440" aria-hidden="true">
+      <g filter="url(#rough)">
+        <path class="ink" d="M210 52 Q213 72 210 92"/>
+        <circle class="fill-r" cx="210" cy="42" r="13"/>
+        <rect class="fill-y" x="110" y="92" width="200" height="140" rx="34"/>
+        <rect class="ink" x="110" y="92" width="200" height="140" rx="34"/>
+        <circle class="dot" cx="170" cy="152" r="15"/>
+        <circle class="dot" cx="250" cy="152" r="15"/>
+        <path class="ink" d="M165 192 Q210 222 255 192"/>
+        <rect class="fill-b" x="128" y="248" width="164" height="132" rx="22"/>
+        <rect class="ink" x="128" y="248" width="164" height="132" rx="22"/>
+        <rect class="ink" x="150" y="270" width="24" height="24" rx="4" style="stroke-width:4"/>
+        <path class="ink" d="M154 282 L161 290 L172 272" style="stroke-width:4"/>
+        <line class="ink" x1="188" y1="282" x2="268" y2="282" style="stroke-width:4"/>
+        <rect class="ink" x="150" y="308" width="24" height="24" rx="4" style="stroke-width:4"/>
+        <path class="ink" d="M154 320 L161 328 L172 310" style="stroke-width:4"/>
+        <line class="ink" x1="188" y1="320" x2="256" y2="320" style="stroke-width:4"/>
+        <rect class="ink" x="150" y="346" width="24" height="24" rx="4" style="stroke-width:4"/>
+        <line class="ink" x1="188" y1="358" x2="240" y2="358" style="stroke-width:4"/>
+        <path class="ink" d="M128 276 Q90 300 78 342"/>
+        <path class="ink" d="M292 276 Q330 250 346 206"/>
+        <path class="ink" d="M336 186 l8 -16 M356 196 l16 -8 M352 176 l12 -12" style="stroke-width:4"/>
+        <path class="ink" d="M172 380 Q169 395 172 410 L160 412"/>
+        <path class="ink" d="M248 380 Q251 395 248 410 L260 412"/>
+      </g>
+      <text x="210" y="438" style="font-size:34px;text-anchor:middle" transform="rotate(-4 210 438)">gets things done!</text>
+    </svg>
+  </section>
+
+  <h2 class="section"><span>Pick a week</span></h2>
+  <div class="grid">
+    <a class="card ready" href="week-1/index.html">
+      <span class="tag">Week 1</span>
+      <h3>Agent <mark>foundations</mark></h3>
+      <p>Loops, tools, state and limits. Theory first, then a live demo, then two hands-on days.</p>
+      <ul class="chips"><li>Day 1 · theory</li><li>Day 2 · demo</li><li>Day 3 · build</li><li>Day 4 · build</li></ul>
+      <span class="go">Open week 1 →</span>
+    </a>
+    <div class="card locked" aria-disabled="true">
+      <span class="soon">Coming soon</span>
+      <span class="tag">Week 2</span>
+      <h3>Design patterns</h3>
+      <p>Route, plan, reflect and evaluate: the patterns that make an agent smarter.</p>
+    </div>
+    <div class="card locked" aria-disabled="true">
+      <span class="soon">Coming soon</span>
+      <span class="tag">Week 3</span>
+      <h3>Context &amp; memory</h3>
+      <p>Context engineering, memory, agentic RAG and MCP.</p>
+    </div>
+    <div class="card locked" aria-disabled="true">
+      <span class="soon">Coming soon</span>
+      <span class="tag">Week 4</span>
+      <h3>Multi-agent</h3>
+      <p>When <i>not</i> to. Supervisors, handoffs and contracts between agents.</p>
+    </div>
+    <div class="card locked" aria-disabled="true">
+      <span class="soon">Coming soon</span>
+      <span class="tag">Week 5</span>
+      <h3>Production agents</h3>
+      <p>Evaluation, observability, reliability, safety and humans in the loop.</p>
+    </div>
+    <div class="card locked" aria-disabled="true">
+      <span class="soon">Coming soon</span>
+      <span class="tag">Week 6</span>
+      <h3>Voice agents</h3>
+      <p>Realtime loops, turn-taking, tools over audio, latency and barge-in.</p>
+    </div>
+  </div>
+  <p class="foot">more weeks open as we reach them ✎</p>
+</div>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

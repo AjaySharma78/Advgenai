@@ -1,4 +1,4 @@
-/* Advanced Agentic AI: shared slide engine
+/* Advanced Generative AI: shared slide engine
    Keys:  Right / Space / PageDown = next (reveals steps first)   Left / PageUp = back
           Home / End = first / last     Q (or N) = likely questions + answers     F = fullscreen     T = light/dark theme
    Print: Ctrl+P -> Save as PDF (one slide per page, all steps visible) */

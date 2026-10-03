@@ -1,4 +1,4 @@
-# Advgenai · Advanced Agentic AI
+# Advgenai · Advanced Generative AI
 
 A six-week hands-on course. Each week has four days. Open `index.html` to start.
 

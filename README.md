@@ -6,12 +6,15 @@ A six-week hands-on course. Each week has four days. Open `index.html` to start.
 ```
 Advgenai/
 ├── index.html            main page: the 6 week cards (only Week 1 is open)
+├── themes.html           the look of each of the six weeks side by side
 ├── .gitignore
 ├── assets/               shared by every page
-│   ├── css/  site.css (home + week pages) · sketch.css + deck.css (the slide decks)
+│   ├── css/  site.css (home + week pages) · themes.css (the 6 week themes) · sketch.css + deck.css (the slide decks)
 │   └── js/   site.js (Colab links, paper/chalkboard) · deck.js (the slide engine)
+├── docs/
+│   └── WEEK_RECIPE.md    how a week is made + the checklist for adding one
 ├── week-1/
-│   ├── index.html        the 4 day cards (only Day 1 is open)
+│   ├── index.html        the 4 day rows (only Day 1 is open)
 │   ├── class-1.html      Day 1 deck (the sketch deck)
 │   └── class-1.ipynb     Day 1 notebook (opens in Google Colab)
 └── week-2/ … week-6/     empty for now
@@ -34,14 +37,15 @@ Change `github` if your repository has a different name. Students add their key 
 
 ## Open the next day
 1. Add `class-2.html` and `class-2.ipynb` to `week-1/` (the same names, `class-N`).
-2. In `week-1/index.html`, replace the locked Day 2 `<article class="card locked">…</article>` with a copy of the Day 1 `<article class="card ready">…</article>` and change its text and the two file names.
+2. In `week-1/index.html`, replace the locked Day 2 `<article class="day locked">…</article>` with a copy of the Day 1 `<article class="day ready">…</article>` and change its text and the two file names.
 
 ## Open the next week
-1. Copy `week-1/index.html` to `week-2/index.html` and edit the four day cards (lock all of them again).
-2. In the main `index.html`, replace Week 2's `<div class="card locked">` with a copy of Week 1's `<a class="card ready" href="week-2/index.html">`.
+See the checklist in `docs/WEEK_RECIPE.md`. In short: copy `week-1/index.html` to `week-2/index.html`, set `data-week="2"` on `<html>`, edit the four day rows (lock them again), then in the main `index.html` turn Week 2's `<div class="card locked">` into a copy of Week 1's `<a class="card ready" href="week-2/index.html">` and make its header pill a link.
 
 ## Look
 - Paper by default; the **☾ chalkboard** button (or **T** inside a deck) switches. The choice is remembered.
+- **Each week has its own theme** (palette, paper, heading font, bottom edge, doodle). Open `themes.html` to see all six. To use one, put `data-week="N"` on `<html>` (whole page) or on any element, and load `assets/css/themes.css` after `site.css` / `sketch.css`. To change a colour, edit that week's block in `themes.css`.
+- Page width is one number: `--page-max` at the top of `assets/css/site.css` (now `1600px`).
 - Letter spacing is one number: `--ls` at the top of `assets/css/site.css` and `assets/css/sketch.css` (now `0.03em`). Raise it for more space.
 
 ## Deploy

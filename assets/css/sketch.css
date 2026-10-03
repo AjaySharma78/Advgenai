@@ -65,25 +65,31 @@
 }
 
 /* ---------- paper ---------- */
-.grid-bg { background: radial-gradient(circle, var(--dots) 1.6px, transparent 1.9px) 0 0 / 34px 34px, var(--bg); }
+/* --paper, --paper-size, --edge and --edge-h come from themes.css when a deck sets data-week="N"; the fallbacks are the Week 1 look */
+.grid-bg {
+  background-color: var(--bg);
+  background-image: var(--paper, radial-gradient(circle, var(--dots) 1.6px, transparent 1.9px));
+  background-size: var(--paper-size, 34px 34px);
+}
 .accent-bar {
-  height: 14px; bottom: 6px;
-  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='14'%3E%3Cpath d='M0 7 Q12 0 24 7 T48 7' fill='none' stroke='%23d93025' stroke-width='3'/%3E%3C/svg%3E") repeat-x;
+  height: var(--edge-h, 14px); bottom: 6px;
+  background: var(--edge, transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='14'%3E%3Cpath d='M0 7 Q12 0 24 7 T48 7' fill='none' stroke='%23d93025' stroke-width='3'/%3E%3C/svg%3E") repeat-x);
 }
 .progress { background: var(--pen-red); }
 
 /* ---------- type ---------- */
 h1, h2 { font-family: var(--font-display); font-weight: 700; letter-spacing: var(--ls); line-height: 1.12; }
 h2 { font-size: 72px; }
-.title-slide h1 { font-size: 150px; line-height: 1.05; }
+.title-slide h1 { font-size: 150px; line-height: 1.05; margin-top: 24px; }
 h1 em, h2 em, .big-statement em {
-  color: inherit; background: var(--hl-yellow); padding: 0 0.14em;
-  border-radius: 0.4em 0.2em 0.5em 0.25em; -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  color: inherit; background: var(--hl-yellow); padding: 0.03em 0.16em 0.08em;
+  display: inline-block; line-height: 0.95;           /* a slim band around the word, not the font's full height */
+  border-radius: 0.4em 0.2em 0.5em 0.25em;
 }
 .big-statement { font-family: var(--font-display); letter-spacing: var(--ls); line-height: 1.2; }
-.eyebrow { font: 700 32px var(--font-note); letter-spacing: var(--ls); text-transform: none; color: var(--pen-red); margin-bottom: 8px; }
+.eyebrow { font: 700 32px var(--font-note); letter-spacing: var(--ls); text-transform: none; color: var(--pen-red); margin-bottom: 16px; }
 .lede, .caption, .how { font-family: var(--font-body); }
-.lede { font-size: 36px; }
+.lede { font-size: 36px; margin-top: 36px; }
 .caption { font-size: 30px; }
 .caption b { background: var(--hl-pink); padding: 0 0.2em; border-radius: 0.3em 0.5em 0.35em 0.45em; }
 .how { font-size: 28px; }

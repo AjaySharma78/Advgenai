@@ -1,6 +1,6 @@
 /* Advanced Generative AI: shared slide engine
    Keys:  Right / Space / PageDown = next (reveals steps first)   Left / PageUp = back
-          Home / End = first / last     Q (or N) = likely questions + answers     F = fullscreen     T = light/dark theme
+          Home / End = first / last     Mouse wheel: down = next, up = back     Q (or N) = likely questions + answers     F = fullscreen     T = light/dark theme
    Print: Ctrl+P -> Save as PDF (one slide per page, all steps visible) */
 (function () {
   var stage = document.querySelector(".deck-stage");
@@ -97,6 +97,18 @@
     if (!document.fullscreenElement) { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
     else { document.exitFullscreen && document.exitFullscreen(); }
   }
+
+  // mouse wheel / trackpad: scroll down = next, scroll up = back (throttled so one gesture moves one step)
+  var wheelLock = 0;
+  document.addEventListener("wheel", function (e) {
+    if (e.ctrlKey) return; // pinch-zoom
+    if (e.target.closest && e.target.closest(".notes-panel")) return; // let the Q&A panel scroll itself
+    e.preventDefault();
+    var now = Date.now();
+    if (now - wheelLock < 450 || Math.abs(e.deltaY) < 4) return;
+    wheelLock = now;
+    if (e.deltaY > 0) next(); else prev();
+  }, { passive: false });
 
   // touch swipe
   var x0 = null;

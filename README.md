@@ -5,7 +5,7 @@ A six-week hands-on course. Each week has four days. Open `index.html` to start.
 ## Folder structure
 ```
 Advgenai/
-├── index.html            main page: the 6 week cards (only Week 1 is open)
+├── index.html            main page: the 6 week cards (Weeks 1 and 2 are open)
 ├── themes.html           the look of each of the six weeks side by side
 ├── .gitignore
 ├── assets/               shared by every page
@@ -13,11 +13,22 @@ Advgenai/
 │   └── js/   site.js (Colab links, paper/chalkboard) · deck.js (the slide engine)
 ├── docs/
 │   └── WEEK_RECIPE.md    how a week is made + the checklist for adding one
-├── week-1/
-│   ├── index.html        the 4 day rows (only Day 1 is open)
-│   ├── class-1.html      Day 1 deck (the sketch deck)
-│   └── class-1.ipynb     Day 1 notebook (opens in Google Colab)
-└── week-2/ … week-6/     empty for now
+├── week-1/               Agent foundations (theme: the sketchbook)
+│   ├── index.html        the 4 day rows
+│   ├── class-1 … class-4 .html (the decks) and .ipynb (the notebooks, opened in Google Colab)
+│   └── trip_planner_agent.ipynb · trip_planner_agent_modern.ipynb
+├── week-2/               Design patterns (theme: the blueprint)
+│   ├── index.html        the 4 day rows
+│   ├── class-1 … class-4 .html (the decks, 7 to 10 slides each) and .ipynb (student notebooks with TODO hints and PASS / NOT YET checks)
+│   ├── assignment.ipynb  the weekly homework: five short tasks
+│   └── class-1 … class-4 _solution.ipynb and assignment_solution.ipynb   the finished, commented notebooks (publish them after class)
+├── week-3/               Context & memory (theme: the index cards)
+│   ├── index.html        the 4 day rows
+│   ├── class-1 … class-4 .html (the decks) and .ipynb (student notebooks with TODO hints and PASS / NOT YET checks)
+│   ├── assignment.ipynb  the weekly homework: five short tasks
+│   ├── course_notes.md   the documents that Day 3 and Day 4 search (RAG); the notebooks download it from GitHub
+│   └── class-1 … class-4 _solution.ipynb and assignment_solution.ipynb   the finished notebooks (publish them after class)
+└── week-4/ … week-6/     empty for now
 ```
 `assets/` is the one folder added on top of the layout you showed, so the CSS and JS are not copied into every page.
 

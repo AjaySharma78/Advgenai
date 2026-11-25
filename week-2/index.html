@@ -87,8 +87,8 @@
       <div class="num"><small>Day</small><b>4</b><span class="mode">build</span></div>
       <div>
         <h3>Guardrails and the research brief project</h3>
-        <p class="blurb">Protect an agent with three kinds of guardrail from the LangChain docs, join every pattern of the week into one workflow, and compare it with one plain agent, with a judge and the token meter. <b>Classwork (you build it yourself):</b> guard your own study helper, and trace every node the project runs.</p>
-        <ul class="leave"><li>Block attacks with Prompt Guard before the agent runs, hide emails with <code>PIIMiddleware</code>, ask a person with <code>HumanInTheLoopMiddleware</code></li><li>Wire one workflow with a guard, a router, workers and an evaluator loop</li><li>Write an eval set and a judge, and decide with your numbers</li></ul>
+        <p class="blurb">Guardrails in LangChain (middleware on an agent: your own input and output checks, plus the built-in PII filter, tool limit and human approval) and in LangGraph (a guard node and an <code>interrupt()</code> pause), then one workflow with every pattern of the week, compared with one plain agent. <b>Classwork (you build it yourself):</b> guard your own study helper; at home, trace every node the project runs.</p>
+        <ul class="leave"><li>LangChain guardrails: block attacks with <code>@before_agent</code> and Prompt Guard, check answers with <code>@after_agent</code>, and stack the built-in <code>PIIMiddleware</code>, <code>ToolCallLimitMiddleware</code> and <code>HumanInTheLoopMiddleware</code></li><li>LangGraph guardrails: a guard node with a conditional edge, and <code>interrupt()</code> to pause a workflow for a person</li><li>Wire one workflow with a guard, a router, workers and an evaluator loop</li><li>Write an eval set and a judge, and decide with your numbers</li></ul>
         <div class="meta"><span>90 min</span><span>deck + notebook</span></div>
       </div>
       <div class="actions">
@@ -140,7 +140,7 @@
       <h3><small>Day 4</small>Guardrails and the project</h3>
       <dl>
         <dt>What we build</dt><dd>A guarded agent, the research brief workflow with every pattern, and the eval table that tests it.</dd>
-        <dt>Blocks used</dt><dd>Llama Prompt Guard 2 (checked before the agent), <code>PIIMiddleware</code>, <code>ToolCallLimitMiddleware</code>, <code>HumanInTheLoopMiddleware</code>, a judge and a baseline agent.</dd>
+        <dt>Blocks used</dt><dd>LangChain: <code>@before_agent</code> with Llama Prompt Guard 2, <code>@after_agent</code>, <code>PIIMiddleware</code>, <code>ToolCallLimitMiddleware</code>, <code>HumanInTheLoopMiddleware</code>. LangGraph: a guard node, <code>interrupt()</code>. A judge and a baseline agent.</dd>
         <dt>What you learn</dt><dd>Guardrails of three kinds (input, output and execution), eval sets, and comparing with a baseline.</dd>
       </dl>
     </section>

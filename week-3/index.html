@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" data-week="3">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 3 · Context &amp; memory · Advgenai</title>
+<meta name="description" content="Week 3: context and memory. Four days: context engineering, long-term memory, agentic RAG, and MCP with a study assistant project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Caveat:wght@500;700&family=Architects+Daughter&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/themes.css">
+<script>try{if(localStorage.getItem("deck-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+</head>
+<body>
+<!-- makes the doodles' lines look hand-drawn -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="7" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</defs></svg>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="../index.html"><span class="dot"></span>Advgenai</a>
+    <nav class="weeks-nav" aria-label="Weeks"><span class="label">week</span><a class="wpill" data-week="1" href="../week-1/index.html" title="Week 1 · Agent foundations">1</a><a class="wpill" data-week="2" href="../week-2/index.html" title="Week 2 · Design patterns">2</a><a class="wpill cur" data-week="3" href="../week-3/index.html" title="Week 3 · Context &amp; memory">3</a><span class="wpill off" data-week="4" aria-disabled="true" title="Week 4 · Multi-agent (coming soon)">4</span><span class="wpill off" data-week="5" aria-disabled="true" title="Week 5 · Production agents (coming soon)">5</span><span class="wpill off" data-week="6" aria-disabled="true" title="Week 6 · Voice agents (coming soon)">6</span></nav>
+    <button class="theme" id="theme" type="button" aria-label="Switch between paper and chalkboard">☾ chalkboard</button>
+  </header>
+
+  <a class="back" href="../index.html">← all weeks</a>
+  <section class="hero small">
+    <div>
+      <p class="note">week 3 · four days · theme: the index cards</p>
+      <h1>Context &amp; <mark>memory</mark></h1>
+      <p class="lede">What the agent sees, and what it keeps. Choose what goes into each model call, give the agent a memory of every student, let it search your own documents, and plug in ready-made tools with MCP. The code follows the current LangChain docs, and on Day 4 everything joins into a study assistant.</p>
+      <div class="stats">
+        <span class="stat"><b>4</b> days</span>
+        <span class="stat"><b>6</b> hours</span>
+        <span class="stat">LangChain · LangGraph · Groq · Google embeddings · MCP</span>
+      </div>
+    </div>
+    <svg class="doodle" viewBox="0 0 420 440" aria-hidden="true"><g filter="url(#rough)" transform="translate(0 24)"><g transform="rotate(-9 160 190)"><rect class="fill-b" x="40" y="70" width="230" height="150" rx="10"/><rect class="ink" x="40" y="70" width="230" height="150" rx="10"/></g><g transform="rotate(5 160 190)"><rect class="fill-g" x="40" y="110" width="230" height="150" rx="10"/><rect class="ink" x="40" y="110" width="230" height="150" rx="10"/></g><rect class="fill-y" x="46" y="150" width="230" height="150" rx="10"/><rect class="ink" x="46" y="150" width="230" height="150" rx="10"/><path class="ink" d="M66 196 H256 M66 228 H256 M66 260 H220" style="stroke-width:3"/><path class="ink" d="M92 150 V300" style="stroke:var(--pen-red);stroke-width:4"/><circle class="fill-r" cx="161" cy="156" r="11"/><circle class="ink" cx="161" cy="156" r="11" style="stroke-width:4"/><path class="fill-b" d="M305 150 V300 Q305 324 355 324 Q405 324 405 300 V150 Z"/><path class="ink" d="M305 150 V300 Q305 324 355 324 Q405 324 405 300 V150"/><ellipse class="fill-b" cx="355" cy="150" rx="50" ry="18"/><ellipse class="ink" cx="355" cy="150" rx="50" ry="18"/><path class="ink" d="M305 208 Q355 232 405 208 M305 264 Q355 288 405 264" style="stroke-width:4"/><path class="ink" d="M190 44 Q290 -14 352 96" style="stroke-dasharray:3 14"/><path class="ink" d="M334 84 L354 100 L360 74"/></g><text x="210" y="434" style="font-size:34px;text-anchor:middle" transform="rotate(-3 210 434)">remembers!</text></svg>
+  </section>
+
+  <h2 class="section"><span>Pick a day</span></h2>
+  <div class="days">
+    <article class="day ready">
+      <div class="num"><small>Day</small><b>1</b><span class="mode">code</span></div>
+      <div>
+        <h3>What the model sees</h3>
+        <p class="blurb">Look inside the context of an agent, give it short-term memory and watch the context grow, keep it small with built-in middleware, and stop a web page that hides instructions for the AI.</p>
+        <ul class="leave"><li>Find what takes the most space in the context</li><li>Add short-term memory with a checkpointer and a thread id</li><li>Summarize old messages, clear old tool results, and guard tool results with Prompt Guard</li></ul>
+        <div class="meta"><span>90 min</span><span>deck + notebook</span></div>
+      </div>
+      <div class="actions">
+        <a class="btn deck" href="class-1.html">Open deck →</a>
+        <a class="btn colab" href="https://colab.research.google.com/github/AjaySharma78/Advgenai/blob/main/week-3/class-1.ipynb" data-colab="week-3/class-1.ipynb" target="_blank" rel="noopener">▶ Open in Colab</a>
+      </div>
+    </article>
+    <article class="day ready">
+      <div class="num"><small>Day</small><b>2</b><span class="mode">code</span></div>
+      <div>
+        <h3>Long-term memory</h3>
+        <p class="blurb">A store keeps facts about each student across conversations. The agent saves and recalls them with tools, and a dynamic prompt puts them in front of the model before every call.</p>
+        <ul class="leave"><li>Save and read facts in a store, one namespace per student</li><li>Write memory tools with <code>ToolRuntime</code>, where your code, not the model, picks the student</li><li>Build the system prompt from the memories with <code>@dynamic_prompt</code></li></ul>
+        <div class="meta"><span>90 min</span><span>deck + notebook</span></div>
+      </div>
+      <div class="actions">
+        <a class="btn deck" href="class-2.html">Open deck →</a>
+        <a class="btn colab" href="https://colab.research.google.com/github/AjaySharma78/Advgenai/blob/main/week-3/class-2.ipynb" data-colab="week-3/class-2.ipynb" target="_blank" rel="noopener">▶ Open in Colab</a>
+      </div>
+    </article>
+    <article class="day ready">
+      <div class="num"><small>Day</small><b>3</b><span class="mode">code</span></div>
+      <div>
+        <h3>Agentic RAG</h3>
+        <p class="blurb">Split the course notes, embed them with Google's free embedding model, store them, and give the agent a search tool. Then check that its answers are grounded in what it found.</p>
+        <ul class="leave"><li>Split documents and embed them in a vector store</li><li>Search by meaning, and turn the search into a tool the agent decides to use</li><li>Grade answers against the retrieved chunks</li></ul>
+        <div class="meta"><span>90 min</span><span>deck + notebook</span></div>
+      </div>
+      <div class="actions">
+        <a class="btn deck" href="class-3.html">Open deck →</a>
+        <a class="btn colab" href="https://colab.research.google.com/github/AjaySharma78/Advgenai/blob/main/week-3/class-3.ipynb" data-colab="week-3/class-3.ipynb" target="_blank" rel="noopener">▶ Open in Colab</a>
+      </div>
+    </article>
+    <article class="day ready">
+      <div class="num"><small>Day</small><b>4</b><span class="mode">build</span></div>
+      <div>
+        <h3>MCP and the study assistant</h3>
+        <p class="blurb">Connect the official LangChain docs server with MCP, then build the week's project: a study assistant with the course notes, memory of each student, a small context, and the docs. Measure it against a plain model.</p>
+        <ul class="leave"><li>Connect an MCP server and use its tools with <code>await</code></li><li>Join notes, memory, docs and middleware into one agent</li><li>Compare right answers and tokens with a plain model</li></ul>
+        <div class="meta"><span>90 min</span><span>deck + notebook</span></div>
+      </div>
+      <div class="actions">
+        <a class="btn deck" href="class-4.html">Open deck →</a>
+        <a class="btn colab" href="https://colab.research.google.com/github/AjaySharma78/Advgenai/blob/main/week-3/class-4.ipynb" data-colab="week-3/class-4.ipynb" target="_blank" rel="noopener">▶ Open in Colab</a>
+      </div>
+    </article>
+    <article class="day ready">
+      <div class="num"><small>Week</small><b>HW</b><span class="mode">practice</span></div>
+      <div>
+        <h3>Assignment: make your study assistant better</h3>
+        <p class="blurb">Five short tasks: compare chunk sizes, add a forget tool, write your own MCP server in a few lines, stop a poisoned document in the notes, and decide with your Day 4 numbers.</p>
+        <ul class="leave"><li>Measure what chunk size does to search and context</li><li>Build and connect your own MCP server</li><li>Remove a poisoned chunk before the model reads it</li></ul>
+        <div class="meta"><span>60 min</span><span>notebook</span></div>
+      </div>
+      <div class="actions">
+        <a class="btn colab" href="https://colab.research.google.com/github/AjaySharma78/Advgenai/blob/main/week-3/assignment.ipynb" data-colab="week-3/assignment.ipynb" target="_blank" rel="noopener">▶ Open in Colab</a>
+      </div>
+    </article>
+  </div>
+
+  <h2 class="section"><span>What we build, day by day</span></h2>
+  <div class="recap">
+    <section class="rc">
+      <h3><small>Day 1</small>Context engineering</h3>
+      <dl>
+        <dt>What we build</dt><dd>A search agent you look inside, a memory agent, a summarizing agent, and a guarded page reader.</dd>
+        <dt>Blocks used</dt><dd><code>InMemorySaver</code>, <code>SummarizationMiddleware</code>, <code>ContextEditingMiddleware</code> with <code>ClearToolUsesEdit</code>, <code>@wrap_tool_call</code>, Prompt Guard.</dd>
+        <dt>What you learn</dt><dd>What the context is, why it grows, how to keep it small, and indirect prompt injection.</dd>
+      </dl>
+    </section>
+    <section class="rc">
+      <h3><small>Day 2</small>Long-term memory</h3>
+      <dl>
+        <dt>What we build</dt><dd>A memory agent that remembers each student in a new thread and never mixes two students up.</dd>
+        <dt>Blocks used</dt><dd><code>InMemoryStore</code>, namespaces, <code>ToolRuntime</code>, <code>context_schema</code>, <code>@dynamic_prompt</code>.</dd>
+        <dt>What you learn</dt><dd>Short-term versus long-term memory, and why the user id must come from your code.</dd>
+      </dl>
+    </section>
+    <section class="rc">
+      <h3><small>Day 3</small>Agentic RAG</h3>
+      <dl>
+        <dt>What we build</dt><dd>A course assistant that searches the course notes by meaning before it answers.</dd>
+        <dt>Blocks used</dt><dd><code>RecursiveCharacterTextSplitter</code>, <code>GoogleGenerativeAIEmbeddings</code>, <code>InMemoryVectorStore</code>, a search tool.</dd>
+        <dt>What you learn</dt><dd>Chunks, embeddings, search by meaning, and grounding checks.</dd>
+      </dl>
+    </section>
+    <section class="rc">
+      <h3><small>Day 4</small>MCP and the project</h3>
+      <dl>
+        <dt>What we build</dt><dd>The study assistant, and an eval table against a plain model.</dd>
+        <dt>Blocks used</dt><dd><code>MCPAdapter</code>, <code>await adapter.list_tools()</code>, <code>await agent.ainvoke()</code>, an async <code>@wrap_tool_call</code>, everything from Days 1 to 3.</dd>
+        <dt>What you learn</dt><dd>What MCP is, async tools, least privilege for tools, and measuring a RAG agent.</dd>
+      </dl>
+    </section>
+  </div>
+
+  <div class="cols">
+    <section class="box green">
+      <h3>By the end of the week you have</h3>
+      <ul class="tick">
+        <li>A <b>study assistant</b> that answers from the course notes, remembers each student, and reads the official docs</li>
+        <li>The habit of looking at the <b>context</b>: what is in it, what it costs, and what could poison it</li>
+        <li>A comparison with <b>a plain model</b>, in numbers: right answers and tokens</li>
+        <li>Your own small <b>MCP server</b></li>
+      </ul>
+    </section>
+    <section class="box blue">
+      <h3>Before you start</h3>
+      <ol>
+        <li><b>Groq</b> (<b>console.groq.com</b> → API Keys) as <code>GROQ_API_KEY</code>, every day. <b>Tavily</b> (<b>tavily.com</b>) as <code>TAVILY_API_KEY</code>, on Day 1.</li>
+        <li><b>New for Days 3 and 4:</b> a free <b>Google AI Studio</b> key (<b>aistudio.google.com</b> → Get API key) as <code>GOOGLE_API_KEY</code>. We use it only for embeddings.</li>
+        <li>In Colab, click the 🔑 <b>Secrets</b> icon, add each key with the name above, and switch <b>Notebook access</b> on.</li>
+        <li>Speed limits: Groq allows about 8,000 tokens a minute and 200,000 a day per model; Google allows 100 embedding requests a minute and 1,000 a day. If a cell ends with <code>RateLimitError</code> or <code>RESOURCE_EXHAUSTED</code>, wait a minute and run it again.</li>
+        <li>Open the deck to follow along (arrow keys, <code>F</code> fullscreen, <code>Q</code> likely questions, <code>T</code> chalkboard), and run the notebook in Colab from top to bottom.</li>
+      </ol>
+    </section>
+  </div>
+
+  <nav class="wnav" aria-label="Week navigation">
+    <a class="btn plain" href="../week-2/index.html">← week 2</a>
+    <span class="btn plain off" aria-disabled="true">Next: week 4 · Multi-agent →</span>
+  </nav>
+  <p class="foot">all four days are open ✎</p>
+</div>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

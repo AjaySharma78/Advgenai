@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" data-week="3">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 3 · Day 4: MCP and the study assistant (index cards)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Caveat:wght@500;700&family=Architects+Daughter&family=Gloria+Hallelujah&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/deck.css">
+<link rel="stylesheet" href="../assets/css/sketch.css">
+<link rel="stylesheet" href="../assets/css/themes.css">
+<style>h2 + .code, h2 + div > .code { margin-top: 30px; }  /* air between a heading and a code block */</style>
+</head>
+<body>
+
+<!-- shared arrowheads for every diagram -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--muted)"/></marker>
+    <marker id="arrow-acc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--accent-line)"/></marker>
+    <!-- makes lines and boxes look hand-drawn -->
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<div class="progress"></div>
+<div class="deck-viewport">
+<div class="deck-stage">
+
+<!-- ============ 01 ============ -->
+<section class="slide grid-bg title-slide">
+  <div class="meta-left"><span class="dot"></span>Week 3 · Day 4</div>
+  <div class="title-meta-right">90 min · You build</div>
+  <div class="geo">
+    <svg class="doodle" viewBox="0 0 420 440" aria-hidden="true">
+      <g filter="url(#rough)">
+        <path class="ink" d="M210 52 Q213 72 210 92"/>
+        <circle class="fill-r" cx="210" cy="42" r="13"/>
+        <rect class="fill-y" x="110" y="92" width="200" height="140" rx="34"/>
+        <rect class="ink" x="110" y="92" width="200" height="140" rx="34"/>
+        <circle class="dot" cx="170" cy="152" r="15"/>
+        <circle class="dot" cx="250" cy="152" r="15"/>
+        <path class="ink" d="M165 192 Q210 222 255 192"/>
+        <rect class="fill-b" x="128" y="248" width="164" height="132" rx="22"/>
+        <rect class="ink" x="128" y="248" width="164" height="132" rx="22"/>
+        <rect class="ink" x="150" y="270" width="24" height="24" rx="4" style="stroke-width:4"/>
+        <path class="ink" d="M154 282 L161 290 L172 272" style="stroke-width:4"/>
+        <line class="ink" x1="188" y1="282" x2="268" y2="282" style="stroke-width:4"/>
+        <rect class="ink" x="150" y="308" width="24" height="24" rx="4" style="stroke-width:4"/>
+        <path class="ink" d="M154 320 L161 328 L172 310" style="stroke-width:4"/>
+        <line class="ink" x1="188" y1="320" x2="256" y2="320" style="stroke-width:4"/>
+        <rect class="ink" x="150" y="346" width="24" height="24" rx="4" style="stroke-width:4"/>
+        <line class="ink" x1="188" y1="358" x2="240" y2="358" style="stroke-width:4"/>
+        <path class="ink" d="M128 276 Q90 300 78 342"/>
+        <path class="ink" d="M292 276 Q330 250 346 206"/>
+        <path class="ink" d="M336 186 l8 -16 M356 196 l16 -8 M352 176 l12 -12" style="stroke-width:4"/>
+        <path class="ink" d="M172 380 Q169 395 172 410 L160 412"/>
+        <path class="ink" d="M248 380 Q251 395 248 410 L260 412"/>
+      </g>
+      <text x="210" y="438" style="font-size:34px;text-anchor:middle" transform="rotate(-4 210 438)">gets things done!</text>
+    </svg>
+  </div>
+  <div class="pad">
+    <div class="eyebrow">Advanced Generative AI</div>
+    <h1>Plug in<br>the <em>docs</em></h1>
+    <p class="lede">MCP connects ready-made tool servers. Then the project: a study assistant with the notes, memory, and the official LangChain docs.</p>
+  </div>
+  <div class="side-block"><div class="label">Today</div><p>Connect. Join.<br>Measure.</p></div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:00 to 0:02</span></div><dl>
+    <dt>What is MCP?</dt><dd>The Model Context Protocol: a standard way for a server to offer tools to any AI app.</dd><dt>Which keys today?</dt><dd>Groq and Google, the same as Day 3. The docs server needs no key.</dd><dt>Is MCP in LangChain stable?</dt><dd>langchain.mcp is new and marked beta: it prints a warning, and the API may still change.</dd><dt>What is the project?</dt><dd>A study assistant: course notes (Day 3), memory (Day 2), small context (Day 1), and the docs (MCP).</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>MCP</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Part 1 · a plug for tools</div>
+    <h2>One server, <em>many</em> apps</h2>
+    <div class="cards cols-3">
+      <div class="card "><div class="k">Before</div><h3>Tools inside your code</h3><p>Every app writes its own search, its own calendar, its own docs tool.</p></div>
+      <div class="card hot"><div class="k">With MCP</div><h3>Tools on a server</h3><p>The LangChain team runs a docs server. Any agent can connect and use its tools.</p></div>
+      <div class="card "><div class="k">Today</div><h3>docs.langchain.com/mcp</h3><p>Public, no key. Three tools: search, read files, send feedback.</p></div>
+    </div>
+    <div class="takeaway"><span class="lbl">Only the tools you need</span><span><code>submit_feedback</code> sends a message to the docs team: an <b>action</b>. We keep only the search tool.</span></div>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:02 to 0:10</span></div><dl>
+    <dt>Is MCP only for LangChain?</dt><dd>No. It is an open standard; many apps and many servers use it.</dd><dt>What else can an MCP server offer?</dt><dd>Any tool: a calendar, a database, a company's internal search.</dd><dt>Why not give the agent all three tools?</dt><dd>Least privilege: an agent should not be able to act in the world when it only needs to read.</dd><dt>Can I write my own server?</dt><dd>Yes, in a few lines with FastMCP. That is Task 3 of the assignment.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>Connect</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">async and await</div>
+    <h2>MCP tools are <em>asynchronous</em></h2>
+    <div class="code" style="font-size:23px;padding:28px 38px"><span class="k">from</span> langchain.mcp <span class="k">import</span> MCPAdapter
+
+async with MCPAdapter("https://docs.langchain.com/mcp") as adapter:
+    docs_tools = await adapter.list_tools()
+
+docs_agent = create_agent(llm, tools=[docs_search], middleware=[shorten_tool_results])
+answer = await docs_agent.ainvoke({"messages": "How do I add short-term memory?"})</div>
+    <p class="caption">An MCP tool talks to a server over the internet, so you <code>await</code> it, and the agent runs with <code>await agent.ainvoke(...)</code>. In Colab, <code>await</code> works directly in a cell.</p>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:10 to 0:25, then you code</span></div><dl>
+    <dt>What does await do?</dt><dd>It waits for a slow operation, like a network call, to finish, without blocking everything else.</dd><dt>What happens with invoke instead of ainvoke?</dt><dd>An error: MCP tools have only an asynchronous version.</dd><dt>Do the tools still work after the async with block?</dt><dd>Yes. The docs say the tools stay callable after the block ends.</dd><dt>Why the beta warning?</dt><dd>langchain.mcp is new in LangChain 1.4. It works, but its API may still change.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>Too big for the context</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Day 1 again</div>
+    <h2>One search: <em>52,000</em> characters</h2>
+    <div class="code" style="font-size:25px;padding:28px 38px">@wrap_tool_call
+async <span class="k">def</span> shorten_tool_results(request, handler):
+    result = await handler(request)                 <span class="c"># run the tool</span>
+    result.content = str(result.content)[:3000]     <span class="c"># keep the first 3,000 characters</span>
+    <span class="k">return</span> result</div>
+    <p class="caption">The free Groq plan allows about 8,000 tokens a minute; one docs search is more than that. The same <code>@wrap_tool_call</code> as the Day 1 guard, written with <code>async def</code> and <code>await</code>, because MCP tools are asynchronous.</p>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:25 to 0:35, then you code</span></div><dl>
+    <dt>Why is the result so big?</dt><dd>The docs server returns many full sections of documentation for one query.</dd><dt>Does cutting lose the answer?</dt><dd>Sometimes. The first sections are the most relevant, so 3,000 characters is usually enough.</dd><dt>Why async def here?</dt><dd>In an asynchronous agent, a plain function middleware raises NotImplementedError. The async version works.</dd><dt>Could ContextEditingMiddleware do this?</dt><dd>No: it clears old tool results, but this one is too big already, on its own.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 05 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>The study assistant</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Part 2 · the week in one agent</div>
+    <h2>Notes, memory, docs, <em>small context</em></h2>
+    <div class="code" style="font-size:20px;padding:22px 26px">study_agent = create_agent(
+    llm,
+    tools=[search_course_notes, save_memory, docs_search],                  <span class="c"># Day 3, Day 2, MCP</span>
+    middleware=[study_prompt, shorten_tool_results,                         <span class="c"># Day 2, Day 1</span>
+                SummarizationMiddleware(model=llm, trigger=("tokens", 3000), keep=("messages", 6))],
+    store=store, context_schema=Context, checkpointer=InMemorySaver(),
+)</div>
+    <p class="caption">Thread 1: "Remember that I find reducers confusing. What is a reducer?" Thread 2: "What did I find confusing? How do I add a checkpointer, according to the docs?"</p>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:40 to 1:00, then you code</span></div><dl>
+    <dt>Why one agent and not a graph?</dt><dd>The agent chooses between three tools by the question. A graph would need us to route by hand.</dd><dt>How does it know which tool?</dt><dd>The dynamic prompt says: course questions to the notes, LangChain code questions to the docs.</dd><dt>Why summarization here?</dt><dd>A long study session grows the context. Above 3,000 tokens the old messages become a summary.</dd><dt>Where is the guard of Day 1?</dt><dd>Add it for real use. In the assignment you protect the notes tool against a poisoned document.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 06 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>Evaluation</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Part 3 · more correct than a plain model?</div>
+    <h2>Right answers <em>and</em> tokens</h2>
+    <table class="tbl">
+      <tr><th></th><th>Right answers</th><th class="acc">Tokens</th></tr>
+      <tr><td>study assistant</td><td>your number</td><td>your number</td></tr>
+      <tr><td>plain model</td><td>your number</td><td>your number</td></tr>
+    </table>
+    <div class="takeaway"><span class="lbl">The same habit as Week 2</span><span>An eval set with right answers, a judge (<code>correct: bool</code>), and a decision that uses <b>both</b> numbers.</span></div>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">1:05 to 1:20, then you code</span></div><dl>
+    <dt>Why does the plain model do badly?</dt><dd>The questions are about our course, which it has never seen.</dd><dt>Is the study assistant always worth it?</dt><dd>For course questions, yes. For 'what is Python?', the plain model is enough and much cheaper.</dd><dt>How reliable is 4 questions?</dt><dd>Not very. It teaches the method; real teams use many more.</dd><dt>What goes in the assignment?</dt><dd>Chunk sizes, a forget tool, your own MCP server, a poisoned document, and a memo.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 07 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>Wrap-up</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Week 3 in one page</div>
+    <h2>Context <em>and</em> memory</h2>
+    <table class="tbl">
+      <tr><th>Day</th><th>Idea</th><th class="acc">Blocks</th></tr>
+      <tr><td>1</td><td>context engineering</td><td>checkpointer, SummarizationMiddleware, ContextEditingMiddleware, a tool guard</td></tr>
+      <tr><td>2</td><td>long-term memory</td><td>InMemoryStore, ToolRuntime, context_schema, @dynamic_prompt</td></tr>
+      <tr><td>3</td><td>agentic RAG</td><td>text splitter, Google embeddings, InMemoryVectorStore, a search tool</td></tr>
+      <tr><td>4</td><td>MCP</td><td>MCPAdapter, await, ainvoke, an async middleware</td></tr>
+    </table>
+    <p class="caption"><b>Next week: multi-agent systems.</b> Several agents, and when one agent is enough.</p>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">1:25 to 1:30</span></div><dl>
+    <dt>What is the one sentence to remember?</dt><dd>Decide what the model sees, what it keeps, and where its knowledge comes from, then measure it.</dd><dt>When is the assignment due?</dt><dd>Before Week 4. It takes about 60 minutes.</dd><dt>What if a cell fails with RateLimitError or RESOURCE_EXHAUSTED?</dt><dd>Wait a minute and run it again. If the daily allowance is used up, continue the next day.</dd><dt>What is Week 4?</dt><dd>Multi-agent systems: when to split work between agents, and how they hand it over.</dd>
+  </dl></aside>
+</section>
+
+</div><!-- /deck-stage -->
+</div><!-- /deck-viewport -->
+
+<div class="deck-controls">
+  <button id="btn-prev" aria-label="Previous">&larr;</button>
+  <span id="counter">01 / 07</span>
+  <button id="btn-next" aria-label="Next">&rarr;</button>
+  <button id="btn-theme">Theme (T)</button>
+  <button id="btn-notes">Questions (Q)</button>
+  <button id="btn-full">Full (F)</button>
+</div>
+<div class="notes-panel" id="notes-panel"></div>
+
+<script src="../assets/js/deck.js"></script>
+</body>
+</html>

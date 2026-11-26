@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" data-week="3">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 3 · Day 2: Long-term memory (index cards)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Caveat:wght@500;700&family=Architects+Daughter&family=Gloria+Hallelujah&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/deck.css">
+<link rel="stylesheet" href="../assets/css/sketch.css">
+<link rel="stylesheet" href="../assets/css/themes.css">
+<style>h2 + .code, h2 + div > .code { margin-top: 30px; }  /* air between a heading and a code block */</style>
+</head>
+<body>
+
+<!-- shared arrowheads for every diagram -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--muted)"/></marker>
+    <marker id="arrow-acc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--accent-line)"/></marker>
+    <!-- makes lines and boxes look hand-drawn -->
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<div class="progress"></div>
+<div class="deck-viewport">
+<div class="deck-stage">
+
+<!-- ============ 01 ============ -->
+<section class="slide grid-bg title-slide">
+  <div class="meta-left"><span class="dot"></span>Week 3 · Day 2</div>
+  <div class="title-meta-right">90 min · You build</div>
+  <div class="geo">
+    <svg class="doodle" viewBox="0 0 420 440" aria-hidden="true">
+      <g filter="url(#rough)">
+        <path class="ink" d="M210 52 Q213 72 210 92"/>
+        <circle class="fill-r" cx="210" cy="42" r="13"/>
+        <rect class="fill-y" x="110" y="92" width="200" height="140" rx="34"/>
+        <rect class="ink" x="110" y="92" width="200" height="140" rx="34"/>
+        <circle class="dot" cx="170" cy="152" r="15"/>
+        <circle class="dot" cx="250" cy="152" r="15"/>
+        <path class="ink" d="M165 192 Q210 222 255 192"/>
+        <rect class="fill-b" x="128" y="248" width="164" height="132" rx="22"/>
+        <rect class="ink" x="128" y="248" width="164" height="132" rx="22"/>
+        <rect class="ink" x="150" y="270" width="24" height="24" rx="4" style="stroke-width:4"/>
+        <path class="ink" d="M154 282 L161 290 L172 272" style="stroke-width:4"/>
+        <line class="ink" x1="188" y1="282" x2="268" y2="282" style="stroke-width:4"/>
+        <rect class="ink" x="150" y="308" width="24" height="24" rx="4" style="stroke-width:4"/>
+        <path class="ink" d="M154 320 L161 328 L172 310" style="stroke-width:4"/>
+        <line class="ink" x1="188" y1="320" x2="256" y2="320" style="stroke-width:4"/>
+        <rect class="ink" x="150" y="346" width="24" height="24" rx="4" style="stroke-width:4"/>
+        <line class="ink" x1="188" y1="358" x2="240" y2="358" style="stroke-width:4"/>
+        <path class="ink" d="M128 276 Q90 300 78 342"/>
+        <path class="ink" d="M292 276 Q330 250 346 206"/>
+        <path class="ink" d="M336 186 l8 -16 M356 196 l16 -8 M352 176 l12 -12" style="stroke-width:4"/>
+        <path class="ink" d="M172 380 Q169 395 172 410 L160 412"/>
+        <path class="ink" d="M248 380 Q251 395 248 410 L260 412"/>
+      </g>
+      <text x="210" y="438" style="font-size:34px;text-anchor:middle" transform="rotate(-4 210 438)">gets things done!</text>
+    </svg>
+  </div>
+  <div class="pad">
+    <div class="eyebrow">Advanced Generative AI</div>
+    <h1>Remember me<br><em>next time</em></h1>
+    <p class="lede">Long-term memory: a store, one namespace per student, memory tools, and a prompt built from what the agent knows.</p>
+  </div>
+  <div class="side-block"><div class="label">Today</div><p>Save. Recall.<br>Never mix up.</p></div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:00 to 0:02</span></div><dl>
+    <dt>How is this different from Day 1?</dt><dd>Day 1 memory lived in one thread. Today's memory lasts across every conversation of a student.</dd><dt>Which key do I need?</dt><dd>Only Groq today.</dd><dt>Is this from the docs?</dt><dd>Yes: the LangChain pages 'Long-term memory' and 'Context engineering'.</dd><dt>Is it like ChatGPT's memory?</dt><dd>Yes, the same idea: a few facts about you, kept between chats.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>Two memories</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Short-term and long-term</div>
+    <h2>A conversation, or a <em>student</em></h2>
+    <table class="tbl">
+      <tr><th></th><th>Short-term (Day 1)</th><th class="acc">Long-term (today)</th></tr>
+      <tr><td>Where</td><td>the checkpointer</td><td>a <b>store</b></td></tr>
+      <tr><td>What</td><td>every message of one conversation</td><td>the facts you choose to keep</td></tr>
+      <tr><td>Lasts</td><td>one thread</td><td>every thread, for that user</td></tr>
+      <tr><td>Example</td><td>"as I said above..."</td><td>"Ram's exam is on 1 December"</td></tr>
+    </table>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:02 to 0:10</span></div><dl>
+    <dt>Why not keep every message forever?</dt><dd>The context would grow without end. A few chosen facts are small and useful.</dd><dt>Who decides what to keep?</dt><dd>Today the agent, with a save tool and your system prompt. You could also save facts from your own code.</dd><dt>Can I use both?</dt><dd>Yes, and the memory agent does: a checkpointer and a store.</dd><dt>Where is the store kept?</dt><dd>InMemoryStore keeps it in memory. A real app uses a database store with the same methods.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>The store</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Part 1 · namespace, key, value</div>
+    <h2>A folder <em>per student</em></h2>
+    <div class="code" style="font-size:24px;padding:28px 38px">store = InMemoryStore()
+store.put(("ram", "memories"), "food", {"fact": "Ram is vegetarian"})     <span class="c"># namespace, key, value</span>
+
+store.get(("ram", "memories"), "food").value        <span class="c"># {"fact": "Ram is vegetarian"}</span>
+store.search(("ram", "memories"))                   <span class="c"># every piece in Ram's folder</span></div>
+    <div class="takeaway"><span class="lbl">The namespace is the wall</span><span>Ram's facts live in <code>(&quot;ram&quot;, &quot;memories&quot;)</code>, Sita's in <code>(&quot;sita&quot;, &quot;memories&quot;)</code>. A search in one folder never sees the other.</span></div>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:10 to 0:25, then you code</span></div><dl>
+    <dt>What is a namespace?</dt><dd>A tuple that works like a folder path. ('ram', 'memories') is the memories folder of Ram.</dd><dt>What is the key?</dt><dd>The name of one piece in the folder. Saving with the same key replaces it.</dd><dt>Can search find by meaning?</dt><dd>With an embedding index, yes. Without one, search lists the folder (and can filter). We use the list.</dd><dt>What is the value?</dt><dd>A Python dictionary. Here one field, fact.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>Memory tools</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Part 2 · ToolRuntime</div>
+    <h2>The model chooses the fact. <em>Your code</em> chooses the student.</h2>
+    <div class="code" style="font-size:21px;padding:22px 28px">@dataclass
+<span class="k">class</span> Context:
+    user_id: str
+
+@tool
+<span class="k">def</span> save_memory(fact: str, runtime: ToolRuntime[Context]) -&gt; str:
+    """Save one short fact about the student."""
+    runtime.store.put((runtime.context.user_id, "memories"), fact, {"fact": fact})
+    <span class="k">return</span> "Saved: " + fact
+
+memory_agent.invoke({"messages": "..."}, config, context=Context(user_id="ram"))</div>
+    <p class="caption">The model sees only <code>fact</code>. <code>runtime</code> is filled in by LangChain, with the <b>user id your code gave</b>, so the model cannot open another student's folder.</p>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:25 to 0:45, then you code</span></div><dl>
+    <dt>What is ToolRuntime?</dt><dd>An extra argument that LangChain fills in: the store, the context, the state. The model never sees it.</dd><dt>What is a dataclass?</dt><dd>A small class that only holds named values. Context holds the user id.</dd><dt>Why not let the model pass the user id?</dt><dd>A user could say 'I am Sita' and read her memories. The id must come from your login, not from the chat.</dd><dt>What does the agent need?</dt><dd>store=store, context_schema=Context, and context=... on every call.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 05 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>A dynamic prompt</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Part 4 · built before every call</div>
+    <h2>The memories go <em>into</em> the prompt</h2>
+    <div class="code" style="font-size:22px;padding:28px 38px">@dynamic_prompt
+<span class="k">def</span> personal_prompt(request):
+    items = request.runtime.store.search((request.runtime.context.user_id, "memories"))
+    facts = ""
+    <span class="k">for</span> item <span class="k">in</span> items:
+        facts = facts + "- " + item.value["fact"] + "\n"
+    <span class="k">return</span> "You are a study assistant. What you know about this student:\n" + facts</div>
+    <p class="caption">In our test the agent answered "Your exam is on 1 December" in a new thread, <b>without calling any tool</b>.</p>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:55 to 1:10, then you code</span></div><dl>
+    <dt>Why not always use the recall tool?</dt><dd>The model may forget to call it. A dynamic prompt gives it the facts every time.</dd><dt>And with 3,000 memories?</dt><dd>Then the prompt would be far too long. Use a tool that finds only the memories that matter.</dd><dt>What is request?</dt><dd>The model call that is about to happen: its messages, and the runtime with the store and the context.</dd><dt>Is this middleware?</dt><dd>Yes. @dynamic_prompt is a middleware, added with middleware=[...].</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 06 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>Wrap-up</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Today you built</div>
+    <h2>An agent that <em>remembers</em> you</h2>
+    <div class="cards cols-3">
+      <div class="card "><div class="k">1 · Store</div><h3>Namespaces</h3><p><code>put</code>, <code>get</code>, <code>search</code>. A folder per student.</p></div>
+      <div class="card hot"><div class="k">2 · Tools</div><h3>ToolRuntime</h3><p>The model chooses the fact; your code chooses the student.</p></div>
+      <div class="card "><div class="k">3 · Prompt</div><h3>@dynamic_prompt</h3><p>The memories go into the system prompt before every call.</p></div>
+    </div>
+    <div class="ex-strip" style="margin-top:28px"><span class="lbl">Day 3</span> <b>agentic RAG</b>: the agent searches the course notes by meaning, with Google embeddings</div>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">1:25 to 1:30</span></div><dl>
+    <dt>What is the one sentence to remember?</dt><dd>Keep a few chosen facts per user in a store, and let your code, never the model, decide whose they are.</dd><dt>Which key do I need for Day 3?</dt><dd>Groq and a free Google AI Studio key, saved as GOOGLE_API_KEY.</dd><dt>How do I get the Google key?</dt><dd>aistudio.google.com, Get API key. It is free.</dd><dt>What if I did not finish?</dt><dd>Finish the TODO cells as practice. Day 3 does not need Day 2's code.</dd>
+  </dl></aside>
+</section>
+
+</div><!-- /deck-stage -->
+</div><!-- /deck-viewport -->
+
+<div class="deck-controls">
+  <button id="btn-prev" aria-label="Previous">&larr;</button>
+  <span id="counter">01 / 06</span>
+  <button id="btn-next" aria-label="Next">&rarr;</button>
+  <button id="btn-theme">Theme (T)</button>
+  <button id="btn-notes">Questions (Q)</button>
+  <button id="btn-full">Full (F)</button>
+</div>
+<div class="notes-panel" id="notes-panel"></div>
+
+<script src="../assets/js/deck.js"></script>
+</body>
+</html>

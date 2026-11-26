@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" data-week="3">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 3 · Day 3: Agentic RAG (index cards)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Caveat:wght@500;700&family=Architects+Daughter&family=Gloria+Hallelujah&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/deck.css">
+<link rel="stylesheet" href="../assets/css/sketch.css">
+<link rel="stylesheet" href="../assets/css/themes.css">
+<style>h2 + .code, h2 + div > .code { margin-top: 30px; }  /* air between a heading and a code block */</style>
+</head>
+<body>
+
+<!-- shared arrowheads for every diagram -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--muted)"/></marker>
+    <marker id="arrow-acc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--accent-line)"/></marker>
+    <!-- makes lines and boxes look hand-drawn -->
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<div class="progress"></div>
+<div class="deck-viewport">
+<div class="deck-stage">
+
+<!-- ============ 01 ============ -->
+<section class="slide grid-bg title-slide">
+  <div class="meta-left"><span class="dot"></span>Week 3 · Day 3</div>
+  <div class="title-meta-right">90 min · You build</div>
+  <div class="geo">
+    <svg class="doodle" viewBox="0 0 420 440" aria-hidden="true">
+      <g filter="url(#rough)">
+        <path class="ink" d="M210 52 Q213 72 210 92"/>
+        <circle class="fill-r" cx="210" cy="42" r="13"/>
+        <rect class="fill-y" x="110" y="92" width="200" height="140" rx="34"/>
+        <rect class="ink" x="110" y="92" width="200" height="140" rx="34"/>
+        <circle class="dot" cx="170" cy="152" r="15"/>
+        <circle class="dot" cx="250" cy="152" r="15"/>
+        <path class="ink" d="M165 192 Q210 222 255 192"/>
+        <rect class="fill-b" x="128" y="248" width="164" height="132" rx="22"/>
+        <rect class="ink" x="128" y="248" width="164" height="132" rx="22"/>
+        <rect class="ink" x="150" y="270" width="24" height="24" rx="4" style="stroke-width:4"/>
+        <path class="ink" d="M154 282 L161 290 L172 272" style="stroke-width:4"/>
+        <line class="ink" x1="188" y1="282" x2="268" y2="282" style="stroke-width:4"/>
+        <rect class="ink" x="150" y="308" width="24" height="24" rx="4" style="stroke-width:4"/>
+        <path class="ink" d="M154 320 L161 328 L172 310" style="stroke-width:4"/>
+        <line class="ink" x1="188" y1="320" x2="256" y2="320" style="stroke-width:4"/>
+        <rect class="ink" x="150" y="346" width="24" height="24" rx="4" style="stroke-width:4"/>
+        <line class="ink" x1="188" y1="358" x2="240" y2="358" style="stroke-width:4"/>
+        <path class="ink" d="M128 276 Q90 300 78 342"/>
+        <path class="ink" d="M292 276 Q330 250 346 206"/>
+        <path class="ink" d="M336 186 l8 -16 M356 196 l16 -8 M352 176 l12 -12" style="stroke-width:4"/>
+        <path class="ink" d="M172 380 Q169 395 172 410 L160 412"/>
+        <path class="ink" d="M248 380 Q251 395 248 410 L260 412"/>
+      </g>
+      <text x="210" y="438" style="font-size:34px;text-anchor:middle" transform="rotate(-4 210 438)">gets things done!</text>
+    </svg>
+  </div>
+  <div class="pad">
+    <div class="eyebrow">Advanced Generative AI</div>
+    <h1>Look it up,<br>do not <em>guess</em></h1>
+    <p class="lede">Agentic RAG: split the course notes, embed them with Google, store them, and give the agent a search tool.</p>
+  </div>
+  <div class="side-block"><div class="label">Today</div><p>Split. Embed.<br>Search. Answer.</p></div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:00 to 0:02</span></div><dl>
+    <dt>What does RAG stand for?</dt><dd>Retrieval-augmented generation: find the right pieces first, then generate the answer from them.</dd><dt>Which keys today?</dt><dd>Groq for the model, and a free Google key for embeddings. Groq has no embedding model.</dd><dt>Is this from the docs?</dt><dd>Yes: the LangGraph 'Agentic RAG' guide and the Google embeddings page.</dd><dt>What documents do we search?</dt><dd>The notes of this course, Weeks 1 and 2.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 02 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>Why RAG</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Part 0 · the model has never seen our notes</div>
+    <h2>A guess, said with <em>confidence</em></h2>
+    <div class="cards cols-2">
+      <div class="card "><div class="k">Without RAG</div><h3>The model guesses</h3><p>Asked about our evaluator loop and Prompt Guard, it invents numbers that sound right.</p></div>
+      <div class="card hot"><div class="k">With RAG</div><h3>The model reads first</h3><p>The 3 closest chunks of the notes go into the context. The answer: <b>3 attempts</b>, a score <b>above 0.5</b>.</p></div>
+    </div>
+    <div class="takeaway"><span class="lbl">Agentic</span><span>The search is a <b>tool</b>. The agent decides <b>when</b> to look something up: a greeting needs no search.</span></div>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:02 to 0:10</span></div><dl>
+    <dt>Why not train the model on our notes?</dt><dd>Training is slow and expensive, and must be done again for every change. RAG uses the notes as they are today.</dd><dt>Why not paste all the notes in the prompt?</dt><dd>For a small file it works, but it costs about 3,000 tokens per question; for many documents it would not fit.</dd><dt>Can RAG still be wrong?</dt><dd>Yes: the search can miss, or the model can add facts. That is why we grade the answer in Part 4.</dd><dt>What is a chunk?</dt><dd>A small piece of a document, here about 500 characters.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 03 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>The pipeline</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Once, before any question</div>
+    <h2>Split, embed, <em>store</em></h2>
+    <svg class="diagram" viewBox="0 0 1760 300" style="margin-top:10px">
+      <rect class="box" x="0" y="90" width="300" height="120"/>
+      <text class="tx-l" x="150" y="160" style="font-size:30px">course notes</text>
+      <line class="line" x1="300" y1="150" x2="380" y2="150" marker-end="url(#arrow)"/>
+      <rect class="box" x="380" y="90" width="340" height="120"/>
+      <text class="tx-lbl" x="550" y="132" style="font-size:18px">TEXT SPLITTER</text>
+      <text class="tx-l" x="550" y="178" style="font-size:28px">35 chunks</text>
+      <line class="line" x1="720" y1="150" x2="800" y2="150" marker-end="url(#arrow)"/>
+      <rect class="box-acc" x="800" y="90" width="400" height="120"/>
+      <text class="tx-lbl white" x="1000" y="132" style="font-size:18px;fill:#fff">GOOGLE EMBEDDINGS</text>
+      <text class="tx-l white" x="1000" y="178" style="font-size:28px">numbers per chunk</text>
+      <line class="line" x1="1200" y1="150" x2="1280" y2="150" marker-end="url(#arrow)"/>
+      <rect class="box-soft" x="1280" y="90" width="460" height="120"/>
+      <text class="tx-lbl" x="1510" y="132" style="font-size:18px">VECTOR STORE</text>
+      <text class="tx-l" x="1510" y="178" style="font-size:28px">similarity_search</text>
+    </svg>
+    <p class="caption">An <b>embedding</b> is a list of 3,072 numbers. Texts with a <b>similar meaning</b> get similar numbers, even with different words.</p>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:10 to 0:20</span></div><dl>
+    <dt>Why 500 characters?</dt><dd>Small enough that a chunk is about one idea, big enough to hold a full answer. The assignment compares it with 1,000.</dd><dt>What is chunk_overlap?</dt><dd>Some text repeated between neighbours, so a sentence cut in half is still whole in one chunk.</dd><dt>How does search find 'similar'?</dt><dd>It compares the numbers of the question with the numbers of every chunk, and returns the closest ones.</dd><dt>Is there a limit on Google's free plan?</dt><dd>100 embedding requests a minute; each chunk is one. If you see RESOURCE_EXHAUSTED, wait a minute.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 04 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>In code</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Parts 1 and 2</div>
+    <h2>Five lines from <em>file</em> to search</h2>
+    <div class="code" style="font-size:22px;padding:28px 38px">chunks = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100).split_documents(docs)
+
+embeddings = GoogleGenerativeAIEmbeddings(model="gemini-embedding-001")
+vector_store = InMemoryVectorStore(embeddings)
+vector_store.add_documents(chunks)
+
+vector_store.similarity_search("How much can I use the free Groq plan each minute?", k=2)</div>
+    <p class="caption">The question says "how much can I use"; the notes say "8,000 tokens a minute". Search by <b>meaning</b> still finds it.</p>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:20 to 0:45, then you code</span></div><dl>
+    <dt>What is a Document?</dt><dd>A LangChain object: page_content (the text) and metadata (where it came from).</dd><dt>Does add_documents call Google?</dt><dd>Yes, once for each chunk. It takes a few seconds.</dd><dt>What does k=2 mean?</dt><dd>Return the 2 closest chunks.</dd><dt>Is InMemoryVectorStore for production?</dt><dd>No, it is lost when the notebook stops. Real apps use a vector database; the methods are the same.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 05 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>The retriever as a tool</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Part 3 · agentic RAG</div>
+    <h2>The agent decides <em>when</em> to look</h2>
+    <div class="code" style="font-size:20px;padding:22px 26px">@tool
+<span class="k">def</span> search_course_notes(query: str) -&gt; str:
+    """Search the notes of the Advanced Generative AI course. Use it for any question about the course."""
+    texts = []
+    <span class="k">for</span> doc <span class="k">in</span> vector_store.similarity_search(query, k=3):
+        texts.append(doc.page_content)
+    <span class="k">return</span> "\n\n".join(texts)
+
+rag_agent = create_agent(llm, tools=[search_course_notes],
+    system_prompt="For any question about the course, call search_course_notes and answer ONLY from what it returns.")</div>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">0:45 to 1:05, then you code</span></div><dl>
+    <dt>Why answer ONLY from the notes?</dt><dd>So the model does not mix what it found with what it guesses.</dd><dt>What if the notes do not say?</dt><dd>The prompt tells it to say so. 'The notes do not say' is a good answer.</dd><dt>Why k=3?</dt><dd>A few chunks give enough to answer without filling the context.</dd><dt>Can the agent search twice?</dt><dd>Yes. If the first search misses, it can try other words: that is the agentic part.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 06 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>Is it grounded?</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Part 4 · the Week 2 evaluator, again</div>
+    <h2>Check the answer against the <em>chunks</em></h2>
+    <table class="tbl">
+      <tr><th>Answer</th><th>Searched the notes?</th><th class="acc">Grounded?</th></tr>
+      <tr><td>plain model</td><td>no</td><td>usually not: it guesses</td></tr>
+      <tr><td>RAG agent</td><td>yes</td><td>yes, when every fact is in the chunks</td></tr>
+    </table>
+    <div class="takeaway"><span class="lbl">RAG lowers guessing. It does not remove it.</span><span>A grounding evaluator (<code>grounded: bool</code>) checks every answer against what was retrieved.</span></div>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">1:05 to 1:20, then you code</span></div><dl>
+    <dt>Is this the same as Week 2 Day 3?</dt><dd>Yes: structured output with a clear rule, 'every fact is in the notes'.</dd><dt>What if the search found the wrong chunks?</dt><dd>Then even a grounded answer is wrong. Test the search itself, as in CHECK 2.</dd><dt>Should every answer be graded?</dt><dd>In an app where wrong answers are expensive, yes. It costs one extra call.</dd><dt>What goes in the assignment?</dt><dd>Chunk sizes, and a poisoned document hidden in the notes.</dd>
+  </dl></aside>
+</section>
+
+<!-- ============ 07 ============ -->
+<section class="slide grid-bg">
+  <div class="meta-left"><span class="dot"></span>Wrap-up</div><div class="slide-num"></div>
+  <div class="pad">
+    <div class="eyebrow">Today you built</div>
+    <h2>An agent that <em>reads</em> before it answers</h2>
+    <div class="cards cols-3">
+      <div class="card "><div class="k">1 · Prepare</div><h3>Split and embed</h3><p>A text splitter, Google embeddings, a vector store.</p></div>
+      <div class="card hot"><div class="k">2 · Retrieve</div><h3>A search tool</h3><p>The agent decides when to look things up.</p></div>
+      <div class="card "><div class="k">3 · Check</div><h3>Grounded?</h3><p>An evaluator compares the answer with the chunks.</p></div>
+    </div>
+    <div class="ex-strip" style="margin-top:28px"><span class="lbl">Day 4</span> <b>MCP</b> and the project: a study assistant with the notes, memory, and the official LangChain docs</div>
+  </div>
+  <div class="accent-bar"></div>
+  <aside class="notes"><div class="qa-head"><b>Questions that may come up</b><span class="time">1:25 to 1:30</span></div><dl>
+    <dt>What is the one sentence to remember?</dt><dd>Find the few pieces that matter, put only them in the context, and check the answer against them.</dd><dt>Which keys for Day 4?</dt><dd>Groq and Google, the same as today.</dd><dt>Do I need to install anything new?</dt><dd>Yes: langchain[mcp]. The install cell does it.</dd><dt>What if I did not finish?</dt><dd>Finish the TODO cells as practice. Day 4 gives you the RAG pieces.</dd>
+  </dl></aside>
+</section>
+
+</div><!-- /deck-stage -->
+</div><!-- /deck-viewport -->
+
+<div class="deck-controls">
+  <button id="btn-prev" aria-label="Previous">&larr;</button>
+  <span id="counter">01 / 07</span>
+  <button id="btn-next" aria-label="Next">&rarr;</button>
+  <button id="btn-theme">Theme (T)</button>
+  <button id="btn-notes">Questions (Q)</button>
+  <button id="btn-full">Full (F)</button>
+</div>
+<div class="notes-panel" id="notes-panel"></div>
+
+<script src="../assets/js/deck.js"></script>
+</body>
+</html>

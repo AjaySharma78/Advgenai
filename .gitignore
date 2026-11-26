@@ -3,4 +3,4 @@
 __pycache__/
 
 # Instructor-only lab solutions: do not publish
-*_solution.ipynb
+# *_solution.ipynb
